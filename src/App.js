@@ -1,25 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [data, setData] = useState([]);
+
+
+    useEffect(()=>{
+        generateQuote();
+    },[]);
+
+    async function generateQuote(){
+        let result = await fetch("https://api.quotable.io/random")
+        .then((res)=>{
+            return res.json();
+        })
+        .then((res)=>{
+            setData(res);
+        })
+    }
+
+
+
+    return (
+        <div className="App">
+            <header>
+                    <div>
+                        <blockquote>The man who comes back through the door in the wall will never be quite the same as the man who went out.</blockquote>
+                        <cite>qwe</cite><br />
+                    </div>
+                <button className='btn' onClick={()=>{ generateQuote() }}>Next Quote</button>
+            </header>
+        </div>
+    );
 }
 
 export default App;
