@@ -6,12 +6,12 @@ function App() {
 
     const [data, setData] = useState([]);
 
-
     useEffect(()=>{
         generateQuote();
     },[]);
 
     async function generateQuote(){
+        console.log("error")
         let result = await fetch("https://api.quotable.io/random")
         .then((res)=>{
             return res.json();
@@ -20,8 +20,6 @@ function App() {
             setData(res);
         })
     }
-
-
 
     return (
         <div className="App">
