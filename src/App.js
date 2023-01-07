@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
 
@@ -11,8 +10,7 @@ function App() {
     },[]);
 
     async function generateQuote(){
-        console.log("error")
-        let result = await fetch("https://api.quotable.io/random")
+        await fetch("https://api.quotable.io/random")
         .then((res)=>{
             return res.json();
         })
@@ -25,8 +23,8 @@ function App() {
         <div className="App">
             <header>
                     <div>
-                        <blockquote>The man who comes back through the door in the wall will never be quite the same as the man who went out.</blockquote>
-                        <cite>qwe</cite><br />
+                        <blockquote>{ data.content }</blockquote>
+                        <cite>{ data.author }</cite><br />
                     </div>
                 <button className='btn' onClick={()=>{ generateQuote() }}>Next Quote</button>
             </header>
